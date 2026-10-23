@@ -1,6 +1,6 @@
-# Deploy the static tournament site to GitHub Pages.
-# enablement creates the Pages site (GitHub Actions source) when it is not
-# already turned on. The workflow token has pages: write; the agent token does not.
+# Deploy the static tournament site when Pages is set to GitHub Actions.
+# If Pages is not enabled yet, this job does not fail: an owner still has to
+# set Settings > Pages > Source to "Deploy from a branch", branch main, folder / (root).
 name: Deploy static content to Pages
 
 on:
@@ -26,14 +26,39 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Check Pages configuration
+        id: pages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set +e
+          body=$(gh api "repos/${GITHUB_REPOSITORY}/pages" 2>/tmp/pages-err)
+          code=$?
+          set -e
+          if [ "$code" -ne 0 ]; then
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+            echo "Pages is not enabled."
+            echo "Set Settings > Pages > Source to Deploy from branch: main, folder / (root)."
+            cat /tmp/pages-err
+            exit 0
+          fi
+          build_type=$(printf '%s' "$body" | jq -r '.build_type')
+          echo "enabled=true" >> "$GITHUB_OUTPUT"
+          echo "build_type=$build_type" >> "$GITHUB_OUTPUT"
+          echo "Pages build_type=$build_type"
+
       - name: Setup Pages
+        if: steps.pages.outputs.build_type == 'workflow'
         uses: actions/configure-pages@v5
-        with:
-          enablement: true
+
       - name: Upload artifact
+        if: steps.pages.outputs.build_type == 'workflow'
         uses: actions/upload-pages-artifact@v3
         with:
           path: "."
+
       - name: Deploy to GitHub Pages
         id: deployment
+        if: steps.pages.outputs.build_type == 'workflow'
         uses: actions/deploy-pages@v4
