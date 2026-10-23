@@ -3,56 +3,86 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta property="og:title" content="Torneo de Pádel – Complejo Ferro Pádel">
-<meta property="og:description" content="Inscripción GRATIS · Masculino y Femenino · Formosa">
+<title>Torneo de Pádel – Medios de Comunicación – Formosa 2026</title>
+<meta name="description" content="13, 14 y 15 de noviembre de 2026 en Complejo Ferro Pádel. Inscripción GRATIS. Masculino y Femenino, categorías libres.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bizu-ar.github.io/ferro-padel/">
+<meta property="og:title" content="Torneo de Pádel – Medios de Comunicación – Formosa 2026">
+<meta property="og:description" content="13, 14 y 15 de noviembre · Complejo Ferro Pádel · Inscripción GRATIS · Masculino y Femenino">
 <meta property="og:image" content="https://bizu-ar.github.io/ferro-padel/flyer.png">
-<title>Torneo de Pádel – Complejo Ferro Pádel</title>
+<meta property="og:image:width" content="1080"><meta property="og:image:height" content="1350">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Torneo de Pádel – Medios de Comunicación – Formosa 2026">
+<meta name="twitter:image" content="https://bizu-ar.github.io/ferro-padel/flyer.png">
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="apple-touch-icon" href="logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&amp;family=Montserrat:wght@500;700;800&amp;display=swap" rel="stylesheet">
 <style>
-:root{--az:#0b2a4a;--ve:#c6f432;--ac:#1e88e5;--bg:#f3f6fa}
-*{box-sizing:border-box}body{margin:0;font-family:Montserrat,system-ui,sans-serif;background:var(--bg);color:#13202e}
-header{background:linear-gradient(160deg,var(--az),#14518a);color:#fff;padding:56px 20px 70px;text-align:center;position:relative;overflow:hidden}
-header:before{content:"";position:absolute;width:220px;height:220px;border-radius:50%;background:var(--ve);opacity:.18;top:-60px;right:-60px}
-header h1{font-size:2rem;font-weight:900;margin:.3em 0;line-height:1.1}header p{opacity:.9}
-.badge{display:inline-block;background:var(--ve);color:var(--az);font-weight:900;padding:6px 14px;border-radius:30px}
-main{max-width:960px;margin:-40px auto 0;padding:0 16px 40px;position:relative}
+:root{--g:#1aa469;--b:#105ca2;--o:#bf6029;--n:#0b1d3a;--h:#0857a2;--bg:#f6f8fb}
+*{box-sizing:border-box}
+body{margin:0;font-family:Montserrat,system-ui,sans-serif;background:var(--bg);color:var(--n);line-height:1.5}
+h1,h2,h3{font-family:Oswald,'Arial Narrow',sans-serif;text-transform:uppercase;color:var(--h);letter-spacing:.5px}
+.stripe{height:10px;background:linear-gradient(90deg,var(--g) 0 33.3%,var(--b) 33.3% 66.6%,var(--o) 66.6%)}
+header{background:#fff;text-align:center;padding:28px 20px 40px;position:relative;overflow:hidden}
+header:before,header:after{content:"";position:absolute;width:260px;height:60px;transform:rotate(-35deg)}
+header:before{left:-90px;top:40px;background:linear-gradient(90deg,var(--g),var(--b))}
+header:after{right:-90px;bottom:40px;background:linear-gradient(90deg,var(--b),var(--o))}
+header>*{position:relative;z-index:1}
+@media(max-width:639px){header:before,header:after{width:160px;height:36px}header:before{left:-70px;top:20px}header:after{right:-70px;bottom:14px}}
+header img{width:min(260px,62vw);height:auto;position:relative}
+header h1{font-size:2.1rem;line-height:1.05;margin:.4em 0 .1em}
+.sub{font-weight:800;font-size:1.05rem;letter-spacing:1px}
+.date{display:inline-block;margin-top:14px;background:var(--n);color:#fff;font-weight:800;padding:10px 18px;border-radius:10px;border-bottom:5px solid var(--o)}
+.badge{display:inline-block;margin-top:10px;background:var(--g);color:#fff;font-weight:800;padding:6px 14px;border-radius:30px}
+main{max-width:980px;margin:0 auto;padding:24px 16px 40px}
 .cards{display:grid;grid-template-columns:1fr;gap:14px}
-@media(min-width:640px){.cards{grid-template-columns:repeat(2,1fr)}header h1{font-size:2.8rem}}
-@media(min-width:900px){.cards{grid-template-columns:repeat(4,1fr)}}
-.card,section{background:#fff;border-radius:16px;padding:20px;box-shadow:0 6px 20px rgba(11,42,74,.1)}
-.card .ic{font-size:2rem}.card h3{margin:.3em 0;color:var(--az)}
-section{margin-top:22px}h2{color:var(--az);border-left:6px solid var(--ve);padding-left:10px}
-.editable{background:#fff7d6;border:1px dashed #e0b400;padding:2px 6px;border-radius:6px}
+@media(min-width:640px){.cards{grid-template-columns:repeat(2,1fr)}header h1{font-size:3rem}}
+@media(min-width:960px){.cards{grid-template-columns:repeat(4,1fr)}}
+.card,section{background:#fff;border-radius:14px;padding:20px;box-shadow:0 4px 16px rgba(11,29,58,.08)}
+.card{border-top:6px solid var(--b)}.card:nth-child(1){border-color:var(--g)}.card:nth-child(3){border-color:var(--o)}
+.card h3{margin:0 0 .3em;font-size:1.3rem}.card p{margin:0}
+section{margin-top:22px}
+h2{font-size:1.7rem;margin-top:0;padding-left:12px;border-left:8px solid var(--g)}
+.editable{background:#eef5ff;border:1px dashed var(--b);padding:2px 6px;border-radius:6px}
+.note{font-size:.85rem;color:#5b6b7c}
 label{display:block;font-weight:700;margin:12px 0 4px}
-input,select,textarea{width:100%;padding:12px;border:2px solid #d5dde8;border-radius:10px;font:inherit}
-input:focus,select:focus,textarea:focus{outline:none;border-color:var(--ac)}
-.btn{display:inline-block;background:#25d366;color:#fff;font-weight:900;border:0;border-radius:12px;padding:14px 20px;font-size:1rem;cursor:pointer;text-decoration:none;margin:6px 6px 0 0}
-.btn.alt{background:var(--az)}
+input,select,textarea{width:100%;padding:12px;border:2px solid #d5dde8;border-radius:10px;font:inherit;color:var(--n)}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--b)}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--b);color:#fff;font-weight:800;border:0;border-radius:10px;padding:12px 16px;font-size:.95rem;cursor:pointer;text-decoration:none;margin:6px 6px 0 0;font-family:inherit}
+.btn svg{width:20px;height:20px;fill:currentColor}
+.wa{background:#25d366}.fb{background:#1877f2}.xx{background:#000}.tg{background:#229ed9}.li{background:#0a66c2}.em{background:var(--o)}.cp{background:var(--n)}.ns{background:var(--g)}.dl{background:#fff;color:var(--b);border:2px solid var(--b)}
+#copied{display:none;color:var(--g);font-weight:800;margin-left:6px}
 footer{text-align:center;padding:20px;color:#5b6b7c;font-size:.9rem}
 </style>
 </head>
 <body>
+<div class="stripe"></div>
 <header>
+<img src="logo.png" alt="Logo Torneo de Pádel Medios de Comunicación Formosa 2026" width="260" height="323">
+<h1>Torneo de Pádel</h1>
+<div class="sub">MEDIOS DE COMUNICACIÓN · FORMOSA 2026</div>
+<div class="date">13, 14 y 15 de noviembre de 2026</div><br>
 <span class="badge">INSCRIPCIÓN GRATIS</span>
-<h1>Torneo de Pádel – Complejo Ferro Pádel</h1>
-<p>Formosa, Argentina · Masculino y Femenino · Categorías libres</p>
+<p>Complejo Ferro Pádel · Formosa</p>
 </header>
+<div class="stripe"></div>
 <main>
 <div class="cards">
-<div class="card"><div class="ic">📅</div><h3>Fecha</h3><p><span class="editable" id="fecha">Fecha a confirmar</span></p></div>
-<div class="card"><div class="ic">🎾</div><h3>Categorías</h3><p>Masculino y Femenino, categorías libres.</p></div>
-<div class="card"><div class="ic">🆓</div><h3>Inscripción</h3><p><strong>GRATIS</strong>, no se paga nada.</p></div>
-<div class="card"><div class="ic">🏆</div><h3>Premios</h3><p>Trofeos, medallas e indumentaria.</p></div>
+<div class="card"><h3>Fecha</h3><p>13, 14 y 15 de noviembre de 2026.</p></div>
+<div class="card"><h3>Categorías</h3><p>Masculino y Femenino, categorías libres.</p></div>
+<div class="card"><h3>Inscripción</h3><p><strong>GRATIS</strong>, no se paga nada.</p></div>
+<div class="card"><h3>Premios</h3><p>Trofeos, medallas e indumentaria.</p></div>
 </div>
 <section id="reglamento">
 <h2>Reglamento</h2>
-<ul class="editable-block">
+<ul>
 <li><span class="editable">Formato: zonas de 3 o 4 parejas; clasifican 2 por zona a llaves.</span></li>
 <li><span class="editable">Tolerancia: 10 minutos. Pasado ese tiempo se pierde el partido.</span></li>
 <li><span class="editable">Lluvia: los partidos se reprograman.</span></li>
 <li><span class="editable">Cupo: a confirmar.</span></li>
 </ul>
+<p class="note">Reglamento sujeto a cambios por la organización.</p>
 </section>
 <section id="inscripcion">
 <h2>Inscribí a tu pareja</h2>
@@ -62,29 +92,61 @@ footer{text-align:center;padding:20px;color:#5b6b7c;font-size:.9rem}
 <label for="wa">WhatsApp de contacto</label><input id="wa" type="tel" required placeholder="3704 123456">
 <label for="rama">Rama</label><select id="rama" required><option value="">Elegí…</option><option>Masculino</option><option>Femenino</option></select>
 <label for="com">Comentario (opcional)</label><textarea id="com" rows="3"></textarea>
-<button class="btn" type="submit">Enviar inscripción por WhatsApp</button>
+<button class="btn wa" type="submit"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9 0-1.4.7-2 1-2.3.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>Enviar inscripción por WhatsApp</button>
 </form>
 </section>
 <section id="contacto">
 <h2>Contacto organizadores</h2>
-<a class="btn" href="https://wa.me/5493704307659" target="_blank" rel="noopener">WhatsApp 3704 307659</a>
-<a class="btn alt" href="https://wa.me/5493704698241" target="_blank" rel="noopener">WhatsApp 3704 698241</a>
+<a class="btn wa" href="https://wa.me/5493704307659" target="_blank" rel="noopener">WhatsApp 3704 307659</a>
+<a class="btn wa" href="https://wa.me/5493704698241" target="_blank" rel="noopener">WhatsApp 3704 698241</a>
+</section>
+<section id="compartir">
+<h2>Compartí el torneo</h2>
+<div id="share">
+<button class="btn ns" id="native" type="button"><svg viewBox="0 0 24 24"><path d="M18 16a3 3 0 0 0-2.4 1.2l-7-3.5a3 3 0 0 0 0-1.4l7-3.5A3 3 0 1 0 15 7l-7 3.5a3 3 0 1 0 0 3l7 3.5A3 3 0 1 0 18 16z"/></svg>Compartir…</button>
+<a class="btn wa" id="s-wa" target="_blank" rel="noopener" href="#">WhatsApp</a>
+<a class="btn fb" id="s-fb" target="_blank" rel="noopener" href="#"><svg viewBox="0 0 24 24"><path d="M14 8V6c0-.9.6-1 1-1h3V1h-4c-3.3 0-4 2.4-4 4v3H7v4h3v11h4V12h3.4l.6-4z"/></svg>Facebook</a>
+<a class="btn xx" id="s-x" target="_blank" rel="noopener" href="#"><svg viewBox="0 0 24 24"><path d="M18.2 2h3.4l-7.4 8.5L23 22h-6.8l-5.3-7-6.1 7H1.4l7.9-9L1 2h7l4.8 6.4zm-1.2 18h1.9L7.1 4H5.1z"/></svg>X</a>
+<a class="btn tg" id="s-tg" target="_blank" rel="noopener" href="#"><svg viewBox="0 0 24 24"><path d="M22 3 2 11l6 2 2 6 3-4 5 4zM9 13l9-7-7 8z"/></svg>Telegram</a>
+<a class="btn li" id="s-li" target="_blank" rel="noopener" href="#"><svg viewBox="0 0 24 24"><path d="M4 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM2 8h4v13H2zm7 0h4v2c.6-1 2-2.3 4.2-2.3 4 0 4.8 2.6 4.8 6V21h-4v-6.4c0-1.5 0-3.5-2.2-3.5S13 12.8 13 14.5V21H9z"/></svg>LinkedIn</a>
+<a class="btn em" id="s-em" href="#"><svg viewBox="0 0 24 24"><path d="M2 5h20v14H2zm2 2v.5l8 5 8-5V7z"/></svg>Email</a>
+<button class="btn cp" id="copy" type="button"><svg viewBox="0 0 24 24"><path d="M8 2h12v14H8zm2 2v10h8V4zM4 6h2v14h10v2H4z"/></svg>Copiar link</button><span id="copied">¡Link copiado!</span>
+</div>
+<p class="note">Para historias de Instagram o TikTok: usá «Compartir…» desde el celu o descargá el flyer y subilo.</p>
+<a class="btn dl" href="flyer.png" download="flyer-torneo-padel-formosa-2026.png"><svg viewBox="0 0 24 24"><path d="M11 3h2v10l3.5-3.5 1.4 1.4L12 16.8 6.1 10.9l1.4-1.4L11 13zM4 19h16v2H4z"/></svg>Descargar flyer</a>
 </section>
 <section id="fixture">
 <h2>Fixture y resultados</h2>
 <p>Se publica al cerrar inscripciones.</p>
 </section>
 </main>
-<footer>Complejo Ferro Pádel · Formosa</footer>
+<div class="stripe"></div>
+<footer>Torneo de Pádel – Medios de Comunicación – Formosa 2026 · Complejo Ferro Pádel</footer>
 <script>
+const URL_T="https://bizu-ar.github.io/ferro-padel/";
+const TXT="🎾 Torneo de Pádel – Medios de Comunicación – Formosa 2026. 13, 14 y 15 de noviembre en Complejo Ferro Pádel. ¡Inscripción GRATIS! Masculino y Femenino.";
+const e=encodeURIComponent,$=id=>document.getElementById(id);
+$("s-wa").href="https://wa.me/?text="+e(TXT+" "+URL_T);
+$("s-fb").href="https://www.facebook.com/sharer/sharer.php?u="+e(URL_T);
+$("s-x").href="https://twitter.com/intent/tweet?text="+e(TXT)+"&url="+e(URL_T);
+$("s-tg").href="https://t.me/share/url?url="+e(URL_T)+"&text="+e(TXT);
+$("s-li").href="https://www.linkedin.com/sharing/share-offsite/?url="+e(URL_T);
+$("s-em").href="mailto:?subject="+e("Torneo de Pádel – Medios de Comunicación – Formosa 2026")+"&body="+e(TXT+"\n\n"+URL_T);
+$("native").addEventListener("click",async()=>{
+ if(navigator.share){try{await navigator.share({title:document.title,text:TXT,url:URL_T})}catch(x){}}
+ else{$("copy").click()}
+});
+$("copy").addEventListener("click",async()=>{
+ try{await navigator.clipboard.writeText(URL_T)}catch(x){const t=document.createElement("textarea");t.value=URL_T;document.body.appendChild(t);t.select();document.execCommand("copy");t.remove()}
+ $("copied").style.display="inline";setTimeout(()=>$("copied").style.display="none",2500);
+});
 function buildLink(d){
- const msg="¡Hola! Quiero inscribir una pareja al Torneo de Pádel – Complejo Ferro Pádel.\n"+
- "Jugador 1: "+d.j1+"\nJugador 2: "+d.j2+"\nWhatsApp: "+d.wa+"\nRama: "+d.rama+
- (d.com?"\nComentario: "+d.com:"");
- return "https://wa.me/5493704307659?text="+encodeURIComponent(msg);
+ const msg="¡Hola! Quiero inscribir una pareja al Torneo de Pádel – Medios de Comunicación – Formosa 2026 (13, 14 y 15 de noviembre).\n"+
+ "Jugador 1: "+d.j1+"\nJugador 2: "+d.j2+"\nWhatsApp: "+d.wa+"\nRama: "+d.rama+(d.com?"\nComentario: "+d.com:"");
+ return "https://wa.me/5493704307659?text="+e(msg);
 }
-document.getElementById("form").addEventListener("submit",function(e){
- e.preventDefault();const g=id=>document.getElementById(id).value.trim();
+$("form").addEventListener("submit",ev=>{
+ ev.preventDefault();const g=id=>$(id).value.trim();
  window.open(buildLink({j1:g("j1"),j2:g("j2"),wa:g("wa"),rama:g("rama"),com:g("com")}),"_blank");
 });
 </script>
