@@ -99,18 +99,13 @@ button.pair:active{transform:scale(.99)}
 .zona-card h3{margin:0 0 .4em;font-size:1.25rem}
 .zona-card ol{margin:0;padding-left:1.2rem}
 .zona-card li{margin:.35em 0;font-weight:700}
-.modal[hidden],.admin-banner[hidden]{display:none !important}
-.modal{position:fixed;inset:0;background:rgba(11,29,58,.55);z-index:20;display:flex;align-items:flex-end;justify-content:center;padding:16px}
-.modal-card{background:#fff;border-radius:16px;padding:20px;width:min(480px,100%);border-top:6px solid var(--b);box-shadow:0 12px 40px rgba(11,29,58,.2)}
-.modal-card h2{margin-top:0}
-.modal-card p{margin:.4em 0 .8em}
-label.token-label{display:block;font-weight:800;margin:0 0 6px}
-#token-input{width:100%;padding:12px;border:2px solid #d5dde8;border-radius:10px;font:inherit;font-size:16px;color:var(--n)}
-.modal-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-.modal .btn-clear{width:auto}
-.token-error{color:#9d2c2c;font-weight:800;min-height:1.2em}
+.admin-banner[hidden],.pin-form[hidden],.toast[hidden]{display:none !important}
+.pin-form{display:flex;gap:8px;align-items:center;background:#fff;border-radius:12px;padding:10px;margin-top:12px;box-shadow:0 4px 16px rgba(11,29,58,.08);border-top:6px solid var(--o)}
+.pin-form label{font-weight:800;font-size:.85rem}
+.pin-form input{flex:1;min-width:0;padding:10px 12px;border:2px solid #d5dde8;border-radius:10px;font:inherit;font-size:16px;color:var(--n)}
+.pin-form input:focus{outline:none;border-color:var(--b)}
+.toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);background:var(--n);color:#fff;font-weight:800;padding:10px 16px;border-radius:999px;z-index:30;box-shadow:0 8px 24px rgba(11,29,58,.28);max-width:calc(100% - 32px);text-align:center}
 footer{text-align:center;padding:20px;color:#5b6b7c;font-size:.9rem}
-@media(min-width:640px){.modal{align-items:center}}
 @media(min-width:860px){
   .match-list,.zona-list{grid-template-columns:1fr 1fr}
 }
@@ -131,11 +126,13 @@ footer{text-align:center;padding:20px;color:#5b6b7c;font-size:.9rem}
 <h2 id="panel-title">Fixture</h2>
 <div class="admin-banner" id="admin-banner" hidden>
 <p>Modo organización. Cada resultado se guarda en el repositorio.</p>
-<div>
-<button class="btn" id="change-token" type="button">Cambiar token</button>
-<button class="btn" id="forget-token" type="button">Olvidar token</button>
+<button class="btn" id="leave-admin" type="button">Salir</button>
 </div>
-</div>
+<form id="pin-form" class="pin-form" hidden>
+<label for="pin-input">PIN</label>
+<input id="pin-input" type="password" inputmode="numeric" autocomplete="off" spellcheck="false" autocapitalize="off" maxlength="16" enterkeyhint="go">
+<button class="btn" type="submit">Entrar</button>
+</form>
 <div class="toolbar">
 <div class="seg" id="day-filters" role="group" aria-label="Día"></div>
 <div class="seg cats" id="cat-filters" role="group" aria-label="Categoría"></div>
@@ -151,26 +148,12 @@ footer{text-align:center;padding:20px;color:#5b6b7c;font-size:.9rem}
 </main>
 <div class="stripe"></div>
 <footer>Torneo de Pádel – Medios de Comunicación – Formosa 2026 · Complejo Ferro Pádel</footer>
-<div class="modal" id="token-modal" hidden role="dialog" aria-modal="true" aria-labelledby="token-title">
-<div class="modal-card">
-<h2 id="token-title">Token de GitHub</h2>
-<p>Pegá un token personal fine-grained con permiso <strong>Contents: Read and write</strong> solo en <strong>bizu-ar/ferro-padel</strong>. Queda guardado en este navegador y no se publica en la página.</p>
-<form id="token-form">
-<label class="token-label" for="token-input">Token</label>
-<input id="token-input" type="password" autocomplete="off" spellcheck="false" autocapitalize="off" autocorrect="off" inputmode="text" placeholder="github_pat_…">
-<p class="token-error" id="token-error" role="status"></p>
-<div class="modal-actions">
-<button class="btn" id="token-save" type="submit">Usar este token</button>
-<button class="btn btn-clear" id="token-cancel" type="button" hidden>Cancelar</button>
-<a class="btn btn-clear" id="token-exit" href="./">Salir</a>
-</div>
-</form>
-</div>
-</div>
+<p id="pin-toast" class="toast" hidden role="status"></p>
 <noscript><p style="padding:16px">Activá JavaScript para ver el fixture.</p></noscript>
 <script src="fixture-data.js"></script>
 <script src="fixture-logic.js"></script>
 <script src="results-store.js"></script>
+<script src="admin-auth.js"></script>
 <script>
 (function () {
   var fixture = globalThis.FIXTURE;
@@ -181,7 +164,7 @@ footer{text-align:center;padding:20px;color:#5b6b7c;font-size:.9rem}
     day: "viernes",
     category: "damas",
     view: "partidos",
-    admin: params.has("admin"),
+    admin: false,
     results: { v: 1, matches: {} },
     saving: {},
     status: {},
@@ -197,11 +180,10 @@ footer{text-align:center;padding:20px;color:#5b6b7c;font-size:.9rem}
   var panel = document.getElementById("panel");
   var dayFilters = document.getElementById("day-filters");
   var catFilters = document.getElementById("cat-filters");
-  var modal = document.getElementById("token-modal");
-  var tokenInput = document.getElementById("token-input");
-  var tokenError = document.getElementById("token-error");
-  var tokenCancel = document.getElementById("token-cancel");
-  var tokenSave = document.getElementById("token-save");
+  var pinForm = document.getElementById("pin-form");
+  var pinInput = document.getElementById("pin-input");
+  var adminBanner = document.getElementById("admin-banner");
+  var toastTimer = 0;
 
   function readRoute() {
     var parts = (location.hash || "").replace(/^#/, "").split("/");
@@ -477,26 +459,48 @@ footer{text-align:center;padding:20px;color:#5b6b7c;font-size:.9rem}
       else delete state.results.matches[id];
       state.pinned[id] = previous;
       state.status[id] = { type: "error", text: error.message || "No se pudo guardar." };
-      if (error.code === "auth" || error.code === "no-token") openToken(error.message);
     } finally {
       state.saving[id] = false;
       render();
     }
   }
 
-  function openToken(message) {
-    if (!state.admin) return;
-    tokenError.textContent = message || "";
-    tokenCancel.hidden = !store.hasToken();
-    modal.hidden = false;
-    document.body.classList.add("modal-open");
-    tokenInput.focus();
+  function showToast(text) {
+    var toast = document.getElementById("pin-toast");
+    toast.textContent = text;
+    toast.hidden = false;
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toast.hidden = true; }, 3500);
   }
 
-  function closeToken() {
-    modal.hidden = true;
-    document.body.classList.remove("modal-open");
-    tokenInput.value = "";
+  function stripParam(name) {
+    var url = new URL(location.href);
+    if (!url.searchParams.has(name)) return;
+    url.searchParams.delete(name);
+    var search = url.searchParams.toString();
+    history.replaceState(null, "", url.pathname + (search ? "?" + search : "") + url.hash);
+  }
+
+  function enterAdmin() {
+    state.admin = true;
+    pinForm.hidden = true;
+    adminBanner.hidden = false;
+    pinInput.value = "";
+    render();
+  }
+
+  async function unlockPin(pin) {
+    try {
+      var token = await globalThis.AdminAuth.unlock(pin);
+      store.setToken(token);
+      enterAdmin();
+      return true;
+    } catch (ignore) {
+      store.clearToken();
+      state.admin = false;
+      pinInput.value = "";
+      return false;
+    }
   }
 
   dayFilters.addEventListener("click", function (event) {
@@ -553,40 +557,37 @@ footer{text-align:center;padding:20px;color:#5b6b7c;font-size:.9rem}
     }
   });
 
-  document.getElementById("token-form").addEventListener("submit", async function (event) {
+  pinForm.addEventListener("submit", async function (event) {
     event.preventDefault();
-    var typed = tokenInput.value.trim().replace(/^Bearer\s+/i, "").replace(/^['"]|['"]$/g, "");
-    if (!/^github_pat_[A-Za-z0-9_]{20,}$/.test(typed)) {
-      tokenError.textContent = "Tiene que ser un fine-grained token y empezar con github_pat_.";
-      return;
-    }
-    tokenSave.disabled = true;
-    tokenError.textContent = "Comprobando…";
-    try {
-      await store.checkToken(typed);
-      store.setToken(typed);
-      tokenInput.value = "";
-      closeToken();
-    } catch (error) {
-      tokenError.textContent = error.message || "No se pudo comprobar el token.";
-    } finally {
-      tokenSave.disabled = false;
-    }
+    var button = pinForm.querySelector("button");
+    button.disabled = true;
+    var ok = await unlockPin(pinInput.value);
+    button.disabled = false;
+    if (!ok) showToast("PIN incorrecto");
   });
-  tokenCancel.addEventListener("click", closeToken);
-  document.getElementById("change-token").addEventListener("click", function () { openToken(""); });
-  document.getElementById("forget-token").addEventListener("click", function () {
+  document.getElementById("leave-admin").addEventListener("click", function () {
     store.clearToken();
-    openToken("Token borrado de este navegador.");
+    state.admin = false;
+    location.href = location.pathname + location.hash;
   });
 
   readRoute();
   buildFilters();
-  if (state.admin) {
-    document.getElementById("admin-banner").hidden = false;
-    if (!store.hasToken()) openToken("");
-  }
   render();
+  (async function bootAdmin() {
+    var pin = params.get("pin");
+    if (pin !== null) {
+      stripParam("pin");
+      var ok = await unlockPin(pin);
+      if (!ok) showToast("PIN incorrecto");
+      return;
+    }
+    if (store.hasToken()) {
+      enterAdmin();
+      return;
+    }
+    if (params.has("admin")) pinForm.hidden = false;
+  })();
   store.load().then(function (data) {
     state.results = applyPinned(data);
     state.loadError = "";

@@ -1,7 +1,7 @@
 /* Resultados del fixture.
    Público: lee results.json al cargar (API de GitHub, después raw, después Pages).
-   Admin (?admin): escribe el mismo archivo en main con un fine-grained PAT
-   que vive solo en localStorage de este navegador. Nunca se commitea el token.
+   Admin: escribe el mismo archivo en main. El token lo descifra admin-auth.js
+   con el PIN y queda solo en memoria o sessionStorage. Nunca se commitea.
 
    Para cambiar el almacenamiento, reemplazá este archivo y mantené:
      load() -> Promise<{v, matches}>
@@ -98,18 +98,34 @@
     return undefined;
   }
 
+  var memoryToken = "";
+
+  function forgetLocalCopy() {
+    try { localStorage.removeItem(TOKEN_KEY); }
+    catch (ignore) { /* sin localStorage */ }
+  }
+
   function getToken() {
-    try { return localStorage.getItem(TOKEN_KEY) || ""; }
-    catch (ignore) { return ""; }
+    forgetLocalCopy();
+    try {
+      var stored = sessionStorage.getItem(TOKEN_KEY);
+      if (stored) return stored;
+    } catch (ignore) { /* sessionStorage no disponible */ }
+    return memoryToken;
   }
 
   function setToken(token) {
-    localStorage.setItem(TOKEN_KEY, String(token || "").trim());
+    memoryToken = String(token || "").trim();
+    forgetLocalCopy();
+    try { sessionStorage.setItem(TOKEN_KEY, memoryToken); }
+    catch (ignore) { /* queda solo en memoria */ }
   }
 
   function clearToken() {
-    try { localStorage.removeItem(TOKEN_KEY); }
-    catch (ignore) { /* almacenamiento no disponible */ }
+    memoryToken = "";
+    forgetLocalCopy();
+    try { sessionStorage.removeItem(TOKEN_KEY); }
+    catch (ignore) { /* sin sessionStorage */ }
   }
 
   function hasToken() {
