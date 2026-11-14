@@ -1,5 +1,9 @@
 {
   "v": 1,
-  "matches": {},
-  "updatedAt": "2026-11-12T13:55:08.822Z"
+  "matches": {
+    "sab-masca-01": {
+      "score": "6-0 6-0"
+    }
+  },
+  "updatedAt": "2026-11-14T17:42:25.588Z"
 }
